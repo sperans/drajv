@@ -11,7 +11,7 @@ class Task extends Component {
     super(props)
     this.state = {
       isModalOpen: false,
-      complete: props.task.complete,
+      complete: props.task.complete || false,
     }
   }
 
@@ -38,7 +38,10 @@ class Task extends Component {
 
   handleSubmit = (task, e) => {
     e.preventDefault()
-    this.props.editTask(task)
+    this.props.editTask({
+      ...this.props.task,
+      ...task
+    })
     .then(() => this.handleModalClose())
     .catch((err) => console.error(err))
   }
