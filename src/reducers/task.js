@@ -11,6 +11,11 @@ export default function Task (state = initialState, action) {
         ...state,
         isLoading: true,
       }
+      case 'FETCHING_USERTASKS' : //ADDED
+        return {
+          ...state,
+          isLoading: true,
+        }
     case 'FETCHING_TASKS_SUCCESS' :
       return {
         ...state,

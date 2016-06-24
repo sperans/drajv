@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as TaskActionCreators from 'actions/task'
 import { header, body, title, desc } from './styles.scss'
-import { TaskModal, TaskActions } from 'components'
+import { TaskModal, TaskActionsUser } from 'components'
 
-class Task extends Component {
+class TaskUser extends Component {
 
   constructor (props) {
     super(props)
@@ -15,17 +15,37 @@ class Task extends Component {
     }
   }
 
-
-  handleTaskComplete = () => {
+  handleModalOpen = (e) => {
+    e.preventDefault()
+    if (!this.props.isAuthed) return
     this.setState({
       ...this.state,
-      complete: !this.state.complete,
-    })
-    this.props.editTask({
-      ...this.props.task,
-      complete: !this.props.task.complete,
+      isModalOpen: true,
     })
   }
+
+  handleModalClose = (e = false) => {
+    if (e) e.preventDefault()
+    this.setState({
+      ...this.state,
+      isModalOpen: false,
+    })
+  }
+
+  handleTaskDelete = () => {
+    this.props.deleteTask(this.props.task._id, this.props.index)
+  }
+
+  handleSubmit = (task, e) => {
+    e.preventDefault()
+    this.props.editTask({
+      ...this.props.task,
+      ...task
+    })
+    .then(() => this.handleModalClose())
+    .catch((err) => console.error(err))
+  }
+
 
   render () {
     return (
@@ -37,24 +57,33 @@ class Task extends Component {
         </div>
         <div className={body}>
           <p className={desc}>{this.props.task.desc}</p>
-          <TaskActions
+          <TaskActionsUser
             isAuthed={this.props.isAuthed}
-            isComplete={this.state.complete}
-            handleTaskComplete={this.handleTaskComplete} />
+            handleModalOpen={this.handleModalOpen}
+            handleTaskDelete={this.handleTaskDelete}
+              />
         </div>
+        <TaskModal
+          isOpen={this.state.isModalOpen}
+          closeModal={this.handleModalClose}
+          handleSubmit={this.handleSubmit}
+          task={this.props.task} />
       </div>
     )
   }
 }
 
-Task.propTypes = {
+TaskUser.propTypes = {
   task: PropTypes.object.isRequired,
   isAuthed: PropTypes.bool.isRequired,
   index: PropTypes.number.isRequired,
-  handleTaskComplete: PropTypes.func,
+  editTask: PropTypes.func.isRequired,
+  deleteTask: PropTypes.func.isRequired,
+  handleModalOpen: PropTypes.func,
+  handleTaskDelete: PropTypes.func,
 }
 
 export default connect(
   ({ User }) => ({ isAuthed: User.isAuthed }),
   (dispatch) => (bindActionCreators(TaskActionCreators, dispatch))
-  )(Task)
+)(TaskUser)

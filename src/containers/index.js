@@ -1,4 +1,6 @@
 export MainContainer from './Main/MainContainer'
 export HomeContainer from './Home/HomeContainer'
+export HomeUserContainer from './HomeUser/HomeUserContainer'
 export LoginContainer from './Login/LoginContainer'
 export SignupContainer from './Signup/SignupContainer'
+export UserContainer from './UserDetails/UserContainer'

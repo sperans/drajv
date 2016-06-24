@@ -22,7 +22,9 @@ function NavLinks ({isAuthed}) {
 function ActionLinks ({isAuthed, handleLogout, handleModalOpen, user}) {
   return isAuthed === true
     ? <ul className={navGroupRight}>
-        <li className={navUser}>{'Hello, '}<strong>{user.email}</strong>{'!'}</li>
+    <li><Link to='/myrides' className={navGroupBtn}>{'Myrides'}</Link></li>
+    <li><Link to='/mydetails' className={navGroupBtn}>{'Mydetails'}</Link></li>
+        <li className={navUser}>{'Hello, '}<strong>{user.displayName} ({user.email})</strong>{'!'}</li>
         <li className={navGroupBtn} onClick={handleModalOpen}>
           <i className={'ion-plus-circled'}></i>
         </li>

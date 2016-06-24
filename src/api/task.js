@@ -15,3 +15,7 @@ export function update (task) {
 export function remove (_id) {
   return Stamplay.Object('task').remove(_id)
 }
+
+export function getAllUserTasks () {
+  return Stamplay.Object('task').findByCurrentUser()
+}

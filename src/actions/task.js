@@ -1,8 +1,14 @@
-import { getAll, add, update, remove } from '../api/task'
+import { getAll, add, update, remove, getAllUserTasks } from '../api/task'
 
 function fetchingTasks () {
   return {
     type: 'FETCHING_TASKS',
+    isLoading: true,
+  }
+}
+function fetchingUserTasks () {
+  return {
+    type: 'FETCHING_USERTASKS',
     isLoading: true,
   }
 }
@@ -34,6 +40,15 @@ export function fetchTasks () {
   return function (dispatch) {
     dispatch(fetchingTasks)
     return getAll()
+      .then(({ data }) => dispatch(fetchingTasksSuccess(data)))
+      .catch((err) => dispatch(fetchingTasksFailure(err)))
+  }
+}
+// ADDED
+export function fetchUserTasks () {
+  return function (dispatch) {
+    dispatch(fetchingUserTasks)
+    return getAllUserTasks()
       .then(({ data }) => dispatch(fetchingTasksSuccess(data)))
       .catch((err) => dispatch(fetchingTasksFailure(err)))
   }

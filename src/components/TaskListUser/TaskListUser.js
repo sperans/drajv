@@ -1,15 +1,15 @@
 import React, { PropTypes } from 'react'
-import { Task } from 'components'
+import { TaskUser } from 'components'
 import { taskListContainer, taskContainer } from './styles.scss'
 
 
-export default function TaskList (props) {
+export default function TaskListUser (props) {
   return (
     <ul className={taskListContainer}>
       {props.tasks.map((task, idx) => {
         return (
           <li className={taskContainer} key={idx} >
-            <Task task={task} index={idx}/>
+            <TaskUser task={task} index={idx}/>
           </li>
         )
       }
@@ -19,6 +19,6 @@ export default function TaskList (props) {
 }
 
 
-TaskList.propTypes = {
+TaskListUser.propTypes = {
   tasks: PropTypes.array.isRequired,
 }

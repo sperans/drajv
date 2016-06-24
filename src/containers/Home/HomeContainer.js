@@ -12,12 +12,13 @@ class HomeContainer extends Component {
   }
 
   render () {
+    console.log("this is HomeContainer"); //ADDED
     return (
       <div>
         <Jumbotron>
-          <h1 className={title}>{'A '}<span className={highlight}>{'React.js'}</span>{' & '}<span className={highlight}>{'Stamplay'}</span>{' Starter Kit'}</h1>
+          <h1 className={title}>{'An '}<span className={highlight}>{'All Rides'}</span>{' & '}<span className={highlight}>{'Reservation'}</span>{' Page'}</h1>
         </Jumbotron>
-        <TaskList tasks={this.props.tasks} />
+        <TaskList tasks={this.props.tasks} users={this.props.users}/>
       </div>
     )
   }
@@ -35,4 +36,3 @@ export default connect(
     }),
     (dispatch) => (bindActionCreators(taskActionCreators, dispatch))
   )(HomeContainer)
-

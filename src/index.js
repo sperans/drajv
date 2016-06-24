@@ -7,7 +7,7 @@ import checkAndAuthCurrentUser from 'actions/user'
 import './styles/main.scss'
 
 /* global Stamplay */
-Stamplay.init('react-seed')
+Stamplay.init('pickup')
 
 const store = configureStore()
 

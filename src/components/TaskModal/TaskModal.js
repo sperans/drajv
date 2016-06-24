@@ -71,7 +71,7 @@ class TaskModal extends Component {
         style={modal}
         shouldCloseOnOverlayClick={true}>
         <button className={`${btn} ${bgCancel}`} onClick={this.props.closeModal}><i className='ion-android-cancel'></i></button>
-        <form className={container}>
+        <form className={container} >
             <input
               value={this.state.task.title}
               name='title'

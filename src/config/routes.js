@@ -5,6 +5,8 @@ import {
   HomeContainer,
   LoginContainer,
   SignupContainer,
+  HomeUserContainer,
+  UserContainer,
 } from 'containers'
 
 export default function routes () {
@@ -14,6 +16,8 @@ export default function routes () {
         <Route path='login' component={LoginContainer} />
         <Route path='signup' component={SignupContainer} />
         <IndexRoute component={HomeContainer} />
+        <Route path='myrides' component={HomeUserContainer} />
+        <Route path='mydetails' component={UserContainer} />
       </Router>
     </Router>
   )
